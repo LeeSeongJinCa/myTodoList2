@@ -1,0 +1,123 @@
+#layout {
+    height: 100vh;
+    min-height: 100vh;
+}
+/*! header */
+#header_wrap {
+    background-color: #bdbdbd;
+    height: 10%;
+    line-height: 70.55px;
+}
+#title {
+    text-align: center;
+}
+#title > div {
+    color: #fff;
+    font-size: 30px;
+}
+#input_wrap {
+    text-align: center;
+}
+#input {
+    width: 55%;
+    border: 0;
+    padding: 0 15px;
+    height: 35px;
+    outline: none;
+}
+#add {
+    width: 15%;
+    height: 35px;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+}
+/*! main */
+#main {
+    min-height: 600px;
+    border: 1px solid #e2e2e2;
+    padding: 10px 15px;
+}
+.list1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #e2e2e2;
+}
+.list1:first-child {
+    border-top: 1px solid #e2e2e2;
+}
+.list1:last-child {
+    border-bottom: none;
+}
+.list1:hover {
+    background-color: #e2e2e2;
+}
+.circle {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    border-radius: 50%;
+    border: 1.5px solid black;
+    cursor: pointer;
+}
+.circle_bg {
+    background-color: black;
+}
+.list_title {
+    width: 90%;
+    min-height: 30px;
+}
+.trash {
+    margin-right: 10px;
+    cursor: pointer;
+}
+.trash:hover {
+    transform: scale(1.15);
+}
+.trash_img {
+    width: 20px;
+    height: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
