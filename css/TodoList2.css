@@ -4,9 +4,9 @@
 }
 /*! header */
 #header_wrap {
-    background-color: #bdbdbd;
-    height: 10%;
-    line-height: 70.55px;
+    background-color: #a021e0;
+    height: 80px;
+    line-height: 80px;
 }
 #title {
     text-align: center;
@@ -29,8 +29,11 @@
     width: 15%;
     height: 35px;
     border: 0;
+    padding: 0;
     outline: none;
     cursor: pointer;
+    background-color: #422d4d;
+    color: #fff;
 }
 /*! main */
 #main {
@@ -38,38 +41,48 @@
     border: 1px solid #e2e2e2;
     padding: 10px 15px;
 }
-.list1 {
+.list {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 5px 0;
     border-bottom: 1px solid #e2e2e2;
 }
-.list1:first-child {
-    border-top: 1px solid #e2e2e2;
-}
-.list1:last-child {
-    border-bottom: none;
-}
-.list1:hover {
+.list:hover {
     background-color: #e2e2e2;
 }
 .circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 20px;
     height: 20px;
     margin-left: 10px;
     border-radius: 50%;
-    border: 1.5px solid black;
+    border: 1.5px solid #6c0f9b;
     cursor: pointer;
 }
-.circle_bg {
-    background-color: black;
+.in_circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+.circle_bg > .circle > .in_circle {
+    background-color: #a422e6;
+}
+.circle_bg > .list_title {
+    text-decoration: line-through;
 }
 .list_title {
+    display: flex;
+    align-items: center;
+    text-align: justify;
+    word-break: break-all;
     width: 90%;
     min-height: 30px;
 }
 .trash {
+    z-index: 1000;
     margin-right: 10px;
     cursor: pointer;
 }
