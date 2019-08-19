@@ -7,17 +7,15 @@
 
 /*
 *1번 기능 시작*/
-let obj = {
-    list: {}
-};
+let obj = {};
 let main = document.getElementById('main');
 let input = document.getElementById('input');
 let cnt = Object.keys(obj).length;
 
-const createList = function (text) {
-    obj.list[`text${cnt}`] = text;
-    checkOut(text);
-
+const createList = function () {
+    if(obj[cnt]["status"] == false) {
+        return;
+    }
     let list = document.createElement('ul');
     list.setAttribute('class', 'list');
     let circle = document.createElement('li');
@@ -27,7 +25,7 @@ const createList = function (text) {
     circle.appendChild(in_circle);
     let list_title = document.createElement('li');
     list_title.setAttribute('class', 'list_title');
-    list_title.innerHTML = obj.list[`text${cnt}`];
+    list_title.innerHTML = obj[cnt]["text"];
     cnt++;
     let trash = document.createElement('li');
     trash.setAttribute('class', 'trash');
@@ -49,28 +47,11 @@ const userInput = function () {
     if (value.trim() == "") {
         alert('Please input enything');
     } else {
-        createList(value);
+        obj[cnt] = { "text": value, "status": true };
+        createList();
     }
     document.getElementById('input').value = "";
     document.getElementById('input').focus();
-}
-
-const checkOut = function (check) {
-    for (var i = 0; i < Object.keys(obj).length - 1; i++) {
-        console.log('1');
-    }
-    // for (var i in obj.list) {
-    //     console.log('1');
-    //     if(check == obj.list[i]) {
-    //         console.log('1');
-    //     }
-    //     console.log(obj.list[i]);
-    //     if (obj.list[i] === obj.list.values) {
-    //         obj.list.splice();
-    //         animals.splice(animals.indexOf("walrus"), 1);
-    //     }
-    // }
-    console.log('end');
 }
 
 let add = document.getElementById('add');
@@ -102,25 +83,26 @@ function removeList() {
     var pp = p.parentElement;
     pp.removeChild(p);
 }
-function remove() {
-
+function deleteObj(su) {
+    delete obj[su];
 }
-
 
 /*
 *2번 기능 끝*/
 
 /*
 *3번 기능 시작*/
-// let server = 'http://api.teamrequin.kro.kr';
+let server = 'http://api.teamrequin.kro.kr';
 
-// function storeList() {
-//     axios.post(server, obj.list).then(() => {
-//         alert('로그인 되었습니다');
-//     }).catch(() => {
-//          console.log('계정이 일치하지 않습니다.');
-//     });
-// }
+function storeList() {
+    axios.post(server, obj).then((data) => {
+        alert('로그인 되었습니다');
+        obj = data;
+        
+    }).catch(() => {
+        console.log('계정이 일치하지 않습니다.');
+    });
+}
 
 
 

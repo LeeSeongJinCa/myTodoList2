@@ -4,7 +4,7 @@
 }
 /*! header */
 #header_wrap {
-    background-color: #a021e0;
+    background-color: #f36f61;
     height: 80px;
     line-height: 80px;
 }
@@ -32,7 +32,7 @@
     padding: 0;
     outline: none;
     cursor: pointer;
-    background-color: #422d4d;
+    background-color: #ffb7af;
     color: #fff;
 }
 /*! main */
@@ -59,7 +59,7 @@
     height: 20px;
     margin-left: 10px;
     border-radius: 50%;
-    border: 1.5px solid #6c0f9b;
+    border: 1.5px solid #f36f61;
     cursor: pointer;
 }
 .in_circle {
@@ -68,7 +68,7 @@
     border-radius: 50%;
 }
 .circle_bg > .circle > .in_circle {
-    background-color: #a422e6;
+    background-color: #f35645;
 }
 .circle_bg > .list_title {
     text-decoration: line-through;
