@@ -78,8 +78,20 @@
     align-items: center;
     text-align: justify;
     word-break: break-all;
-    width: 90%;
+    width: 85%;
     min-height: 30px;
+}
+.edit {
+    z-index: 1000;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.edit:hover {
+    transform: scale(1.15);
+}
+.edit_img {
+    width: 20px;
+    height: 20px;
 }
 .trash {
     z-index: 1000;
@@ -93,44 +105,3 @@
     width: 20px;
     height: 20px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

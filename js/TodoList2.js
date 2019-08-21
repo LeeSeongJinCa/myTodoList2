@@ -1,7 +1,7 @@
 /*
 ! 기능 개요
 * 1. 리스트 추가
-* 2. 리스트에 완료기능, 삭제기능 추가
+* 2. 리스트에 완료기능, 삭제기능, 수정기능 추가
 * 3. Axios로 서버 통신기능 추가
 */
 
@@ -16,6 +16,31 @@ const createList = function () {
     if (obj[cnt]["status"] == false) {
         return;
     }
+    makeList();
+    listOption();
+    runRendering();
+    // storeList();
+}
+const rendering = function() {
+    var list_text = document.getElementsByClassName('list_title');
+    for (var i = 0; i < obj.length; i++) {
+        if (obj[i]["status"] == false) {
+            continue;
+        } else {
+            list_text[i].innerHTML = obj[i].text;
+        }
+    }
+}
+const runRendering = function() {
+    try {
+        rendering();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+const makeList = function() {
     let list = document.createElement('ul');
     list.setAttribute('class', 'list');
     let circle = document.createElement('li');
@@ -26,6 +51,13 @@ const createList = function () {
     let list_title = document.createElement('li');
     list_title.setAttribute('class', 'list_title');
     list_title.innerHTML = obj[cnt]["text"];
+    let edit = document.createElement('li');
+    edit.setAttribute('class', 'edit');
+    edit.setAttribute('id', `${cnt}`);
+    let edit_img = document.createElement('img');
+    edit_img.setAttribute('src', 'img/edit.svg');
+    edit_img.setAttribute('class', 'edit_img');
+    edit.appendChild(edit_img);
     let trash = document.createElement('li');
     trash.setAttribute('class', 'trash');
     trash.setAttribute('id', `${cnt}`);
@@ -35,13 +67,10 @@ const createList = function () {
     trash.appendChild(trash_img);
     list.appendChild(circle);
     list.appendChild(list_title);
+    list.appendChild(edit);
     list.appendChild(trash);
     main.appendChild(list);
-
-    listOption();
-    // storeList();
 }
-
 const userInput = function () {
     var value = document.getElementById('input').value;
     if (value.trim() == "") {
@@ -71,25 +100,34 @@ input.onkeyup = () => {
 function listOption() {
     var a = document.querySelectorAll('.list');
     var b = document.querySelectorAll('.trash');
+    var c = document.querySelectorAll('.edit');
     for (var i = 0; i < a.length; i++) {
         a[i].addEventListener('click', circle_toggle);
         b[i].addEventListener('click', removeList);
+        c[i].addEventListener('click', edit);
     }
 }
 function circle_toggle() {
     this.classList.toggle('circle_bg');
 }
 function removeList() {
-    var self = this;
     var p = this.parentElement;
     var pp = p.parentElement;
     pp.removeChild(p);
-    statusObj(self);
+    statusObj(this);
 }
 function statusObj(el) {
     var id = el.getAttribute('id');
     obj[id].status = false;
 }
+// * 수정기능 => 사용자에게 수정한 키를 받아옴 
+// * -> obj의 "text"값을 변경 -> rendering() 실행
+function edit() {
+    console.log('edit 실행');
+    var id = this.getAttribute('id');
+    var p = this.parentElement;
+}
+
 
 /*
 *2번 기능 끝*/
