@@ -82,6 +82,7 @@ function removeList() {
     var p = this.parentElement;
     var pp = p.parentElement;
     pp.removeChild(p);
+    
 }
 function deleteObj(su) {
     delete obj[su];
@@ -92,17 +93,17 @@ function deleteObj(su) {
 
 /*
 *3번 기능 시작*/
-let server = 'http://api.teamrequin.kro.kr';
+// let server = 'http://api.teamrequin.kro.kr';
 
-function storeList() {
-    axios.post(server, obj).then((data) => {
-        alert('로그인 되었습니다');
-        obj = data;
+// function storeList() {
+//     axios.post(server, obj).then((data) => {
+//         alert('로그인 되었습니다');
+//         obj = data;
         
-    }).catch(() => {
-        console.log('계정이 일치하지 않습니다.');
-    });
-}
+//     }).catch(() => {
+//         console.log('계정이 일치하지 않습니다.');
+//     });
+// }
 
 
 
