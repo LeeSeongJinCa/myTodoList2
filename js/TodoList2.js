@@ -7,13 +7,13 @@
 
 /*
 *1번 기능 시작*/
-let obj = {};
+let obj = [];
 let main = document.getElementById('main');
 let input = document.getElementById('input');
 let cnt = Object.keys(obj).length;
 
 const createList = function () {
-    if(obj[cnt]["status"] == false) {
+    if (obj[cnt]["status"] == false) {
         return;
     }
     let list = document.createElement('ul');
@@ -26,9 +26,9 @@ const createList = function () {
     let list_title = document.createElement('li');
     list_title.setAttribute('class', 'list_title');
     list_title.innerHTML = obj[cnt]["text"];
-    cnt++;
     let trash = document.createElement('li');
     trash.setAttribute('class', 'trash');
+    trash.setAttribute('id', `${cnt}`);
     let trash_img = document.createElement('img');
     trash_img.setAttribute('src', 'img/delete.svg');
     trash_img.setAttribute('class', 'trash_img');
@@ -49,6 +49,7 @@ const userInput = function () {
     } else {
         obj[cnt] = { "text": value, "status": true };
         createList();
+        cnt++;
     }
     document.getElementById('input').value = "";
     document.getElementById('input').focus();
@@ -79,13 +80,15 @@ function circle_toggle() {
     this.classList.toggle('circle_bg');
 }
 function removeList() {
+    var self = this;
     var p = this.parentElement;
     var pp = p.parentElement;
     pp.removeChild(p);
-    
+    statusObj(self);
 }
-function deleteObj(su) {
-    delete obj[su];
+function statusObj(el) {
+    var id = el.getAttribute('id');
+    obj[id].status = false;
 }
 
 /*
@@ -99,7 +102,7 @@ function deleteObj(su) {
 //     axios.post(server, obj).then((data) => {
 //         alert('로그인 되었습니다');
 //         obj = data;
-        
+
 //     }).catch(() => {
 //         console.log('계정이 일치하지 않습니다.');
 //     });
