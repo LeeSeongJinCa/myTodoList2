@@ -1,3 +1,6 @@
+body {
+    color: #4d4d4d;
+}
 #layout {
     height: 100vh;
     min-height: 100vh;
@@ -5,8 +8,8 @@
 /*! header */
 #header_wrap {
     background-color: #f36f61;
-    height: 80px;
-    line-height: 80px;
+    height: 100px;
+    line-height: 100px;
 }
 #title {
     text-align: center;
@@ -19,21 +22,12 @@
     text-align: center;
 }
 #input {
-    width: 55%;
+    width: 65%;
     border: 0;
-    padding: 0 15px;
-    height: 35px;
+    padding: 0 25px;
+    height: 55px;
     outline: none;
-}
-#add {
-    width: 15%;
-    height: 35px;
-    border: 0;
-    padding: 0;
-    outline: none;
-    cursor: pointer;
-    background-color: #ffb7af;
-    color: #fff;
+    font-size: 24px;
 }
 /*! main */
 #main {
@@ -42,8 +36,8 @@
     padding: 10px 15px;
 }
 .list {
+    position: relative;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 5px 0;
     border-bottom: 1px solid #e2e2e2;
@@ -51,13 +45,16 @@
 .list:hover {
     background-color: #e2e2e2;
 }
+.list:hover > .trash {
+    visibility: visible;
+}
 .circle {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 20px;
     height: 20px;
-    margin-left: 10px;
+    margin: 0 10px;
     border-radius: 50%;
     border: 1.5px solid #f36f61;
     cursor: pointer;
@@ -67,7 +64,7 @@
     height: 15px;
     border-radius: 50%;
 }
-.circle_bg > .circle > .in_circle {
+.circle_bg > .in_circle {
     background-color: #f35645;
 }
 .circle_bg > .list_title {
@@ -76,24 +73,25 @@
 .list_title {
     display: flex;
     align-items: center;
-    text-align: justify;
+    text-align: left;
     word-break: break-all;
     width: 85%;
     min-height: 30px;
+    font-size: 24px;
 }
-.edit {
-    z-index: 1000;
-    margin-right: 10px;
-    cursor: pointer;
+.editing > .list_title_inner {
+    outline: 1px solid black;
 }
-.edit:hover {
-    transform: scale(1.15);
-}
-.edit_img {
-    width: 20px;
-    height: 20px;
+.list_title_inner {
+    all: unset;
+    width: 100%;
+    user-select: none;
+    padding: 3px 10px;
 }
 .trash {
+    position: absolute;
+    right: 0;
+    visibility: hidden;
     z-index: 1000;
     margin-right: 10px;
     cursor: pointer;

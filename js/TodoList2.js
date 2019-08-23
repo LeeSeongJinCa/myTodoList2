@@ -2,7 +2,6 @@
 ! 기능 개요
 * 1. 리스트 추가
 * 2. 리스트에 완료기능, 삭제기능, 수정기능 추가
-* 3. Axios로 서버 통신기능 추가
 */
 
 /*
@@ -12,143 +11,106 @@ let main = document.getElementById('main');
 let input = document.getElementById('input');
 let cnt = Object.keys(obj).length;
 
-const createList = function () {
+const createList = () => {
     if (obj[cnt]["status"] == false) {
         return;
     }
     makeList();
     listOption();
-    runRendering();
-    // storeList();
 }
-const rendering = function() {
-    var list_text = document.getElementsByClassName('list_title');
-    for (var i = 0; i < obj.length; i++) {
-        if (obj[i]["status"] == false) {
-            continue;
-        } else {
-            list_text[i].innerHTML = obj[i].text;
-        }
-    }
+const rendering = () => {
+    var list_text = document.getElementsByClassName('list_title_inner');
+    list_text[i].innerHTML = obj[i].text;
 }
-const runRendering = function() {
-    try {
-        rendering();
-    } catch (error) {
-        console.log(error);
-    }
+const makeList = () => {
+    let main = document.getElementById('main');
+    let list = `<ul class="list" id="${cnt}">
+        <li class="circle">
+            <div class="in_circle"></div>
+        </li>
+        <li class="list_title" id="${cnt}">
+            <input readOnly type="text" class="list_title_inner" value="${obj[cnt]["text"]}">
+        </li>
+        <li class="trash" id="${cnt}">
+            <img src="img/delete.svg" class="trash_img">
+        </li>
+    </ul>`
+    main.insertAdjacentHTML("beforeend", list);
 }
-
-
-const makeList = function() {
-    let list = document.createElement('ul');
-    list.setAttribute('class', 'list');
-    let circle = document.createElement('li');
-    circle.setAttribute('class', 'circle');
-    let in_circle = document.createElement('div');
-    in_circle.setAttribute('class', 'in_circle');
-    circle.appendChild(in_circle);
-    let list_title = document.createElement('li');
-    list_title.setAttribute('class', 'list_title');
-    list_title.innerHTML = obj[cnt]["text"];
-    let edit = document.createElement('li');
-    edit.setAttribute('class', 'edit');
-    edit.setAttribute('id', `${cnt}`);
-    let edit_img = document.createElement('img');
-    edit_img.setAttribute('src', 'img/edit.svg');
-    edit_img.setAttribute('class', 'edit_img');
-    edit.appendChild(edit_img);
-    let trash = document.createElement('li');
-    trash.setAttribute('class', 'trash');
-    trash.setAttribute('id', `${cnt}`);
-    let trash_img = document.createElement('img');
-    trash_img.setAttribute('src', 'img/delete.svg');
-    trash_img.setAttribute('class', 'trash_img');
-    trash.appendChild(trash_img);
-    list.appendChild(circle);
-    list.appendChild(list_title);
-    list.appendChild(edit);
-    list.appendChild(trash);
-    main.appendChild(list);
-}
-const userInput = function () {
+const userInput = () => {
     var value = document.getElementById('input').value;
     if (value.trim() == "") {
         alert('Please input enything');
     } else {
-        obj[cnt] = { "text": value, "status": true };
+        addTodoInObj(value);
         createList();
         cnt++;
     }
     document.getElementById('input').value = "";
     document.getElementById('input').focus();
 }
-
-let add = document.getElementById('add');
-add.addEventListener('click', userInput);
-input.onkeyup = () => {
-    //* 키 코드 받아오는 방법 -> https://cofs.tistory.com/12
-    if (window.event.keyCode == 13) {
-        userInput();
+const addTodoInObj = (v) => {
+    obj[cnt] = { "text": v };
+}
+input.addEventListener('click', inputOnKeyUp);
+const inputOnKeyUp = (el) => {
+    el.onkeyup = () => {
+        if (window.event.keyCode == 13) {
+            userInput();
+        }
     }
 }
+
 /*
 *1번 기능 끝*/
 
 /*
 *2번 기능 시작*/
-function listOption() {
-    var a = document.querySelectorAll('.list');
-    var b = document.querySelectorAll('.trash');
-    var c = document.querySelectorAll('.edit');
-    for (var i = 0; i < a.length; i++) {
-        a[i].addEventListener('click', circle_toggle);
-        b[i].addEventListener('click', removeList);
-        c[i].addEventListener('click', edit);
+const listOption = () => {
+    let circle = document.querySelectorAll('.circle');
+    let trash = document.querySelectorAll('.trash');
+    let listTitle = document.querySelectorAll('.list_title');
+    for (var i = 0; i < obj.length; i++) {
+        circle[i].addEventListener('click', circleToggle);
+        trash[i].addEventListener('click', removeList);
+        listTitle[i].addEventListener('dblclick', focusIn);
+        listTitle[i].addEventListener('focusout', focusOut);
     }
 }
-function circle_toggle() {
+const circleToggle = () => {
     this.classList.toggle('circle_bg');
 }
-function removeList() {
+const removeList = () => {
     var p = this.parentElement;
     var pp = p.parentElement;
     pp.removeChild(p);
     statusObj(this);
 }
-function statusObj(el) {
+const statusObj = (el) => {
     var id = el.getAttribute('id');
-    obj[id].status = false;
+    obj.splice(id, 1);
 }
-// * 수정기능 => 사용자에게 수정한 키를 받아옴 
-// * -> obj의 "text"값을 변경 -> rendering() 실행
-function edit() {
-    console.log('edit 실행');
+const focusIn = () => {
+    var list_title_inner = document.querySelectorAll('.list_title_inner');
     var id = this.getAttribute('id');
-    var p = this.parentElement;
+    list_title_inner[id].parentElement.classList.add("editing");
+    list_title_inner[id].removeAttribute("readOnly");
+
+    editOnKeyUp(list_title_inner, id);
 }
-
-
+const editOnKeyUp = (el, tag, id) => {
+    el.onkeyup = () => {
+        if (window.event.keyCode == 13) {
+            tag[id].parentElement.classList.remove("editing");
+            tag[id].readOnly = "true";
+        }
+    }
+}
+const focusOut = () => {
+    var list_title_inner = document.querySelectorAll('.list_title_inner');
+    var id = this.getAttribute('id');
+    list_title_inner[id].parentElement.classList.remove("editing");
+    list_title_inner[id].readOnly = "true";
+}
 /*
 *2번 기능 끝*/
-
-/*
-*3번 기능 시작*/
-// let server = 'http://api.teamrequin.kro.kr';
-
-// function storeList() {
-//     axios.post(server, obj).then((data) => {
-//         alert('로그인 되었습니다');
-//         obj = data;
-
-//     }).catch(() => {
-//         console.log('계정이 일치하지 않습니다.');
-//     });
-// }
-
-
-
-
-
-
-
