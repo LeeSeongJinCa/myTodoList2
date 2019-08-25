@@ -3,27 +3,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TodoList2</title>
+    <title>DMS과제_todo list_1217_이성진</title>
     <link rel="stylesheet" href="css/TodoList2.css">
     <link rel="stylesheet" href="css/reset.css">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-
     <div id="layout">
         <header id="header_wrap">
-            <ul id="header_ul">
-                <li class="header_ul_li">
-                    <p id="item_left_number"></p>
+            <ul id="header_left_ul">
+                <li class="header_left_ul_li left_items">
+                    <p id="item_left_number">0</p>
+                    <p id="item_left_text">item(s) left</p>
                 </li>
-                <p id="item_left_text">item(s) left</p>
-                <li class="header_ul_li">
-                    <p id="clear_list">Clear All</p>
+                <li class="header_left_ul_li done_items">
+                    <p id="item_done_number">0</p>
+                    <p id="item_done_text">item(s) done</p>
                 </li>
             </ul>
             <div id="input_wrap">
                 <input id="input" type="text" autofocus autocomplete="off" placeholder="입력...">
             </div>
+            <ul id="header_right_ul">
+                <li class="header_right_ul_li">
+                    <p id="clear_list">Clear All</p>
+                </li>
+            </ul>
         </header>
         <main id="main_wrap">
             <div id="main">
@@ -32,6 +36,5 @@
         </main>
     </div>
     <script src="js/TodoList2.js" type="text/javascript"></script>
-
 </body>
 </html>

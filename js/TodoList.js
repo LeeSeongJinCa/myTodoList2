@@ -12,6 +12,7 @@ let checkObj = [];
 let main = document.getElementById('main');
 let input = document.getElementById('input');
 let cnt = Object.keys(obj).length;
+let circleCnt = 0;
 
 const createList = function () {
     if (obj[cnt]["status"] == false) {
@@ -28,7 +29,7 @@ const makeList = function () {
         </li>
         <li class="list_title" id="${cnt}">
             <input readOnly type="text" class="list_title_inner" value="${obj[cnt]["text"]}">
-            </li>
+        </li>
         <li class="trash" id="${cnt}">
             <img src="img/delete.svg" class="trash_img">
         </li>
@@ -68,6 +69,7 @@ function listOption() {
     let listTitle = document.querySelectorAll('.list_title');
     for (var i = 0; i < obj.length; i++) {
         circle[i].addEventListener('click', circleToggle);
+        circle[i].addEventListener('click', itemDoneCheck);
         trash[i].addEventListener('click', removeList);
         listTitle[i].addEventListener('dblclick', focusIn);
         listTitle[i].addEventListener('focusout', focusOut);
@@ -129,12 +131,14 @@ function changeListCheck() {
 
 /*
 *3번 기능 시작*/
-window.onload = () => {
-    itemLeftCheck();
-}
 function itemLeftCheck() {
-    let item_left = document.getElementById('item_left_number');
-    item_left.innerHTML = cnt;
+    let itemLeft = document.getElementById('item_left_number');
+    itemLeft.innerHTML = cnt;
+}
+function itemDoneCheck() {
+    let itemDone = document.getElementById('item_done_number');
+    let circleBgLength = document.getElementsByClassName('circle_bg').length;
+    itemDone.innerHTML = circleBgLength;
 }
 document.getElementById('clear_list').onclick = () => {
     if (confirm('Are you sure?')) {
@@ -142,6 +146,7 @@ document.getElementById('clear_list').onclick = () => {
         cnt = 0;
         obj = [];
         itemLeftCheck();
+        itemDoneCheck();
     } else {
         return;
     }
